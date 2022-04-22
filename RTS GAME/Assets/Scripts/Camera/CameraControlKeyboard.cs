@@ -12,8 +12,8 @@ namespace Camera
         public float minPositionY;
 
         [SerializeField] private Camera cameraControl;
-
-        public Vector3 newPosition;
+        
+        [SerializeField] private Vector3 newPosition;
 
 
         private void Start()
