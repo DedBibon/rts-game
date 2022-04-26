@@ -33,9 +33,9 @@ namespace CameraControl
         private void Update()
         {
             //Rotation event
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(2))
                 _isRotation = true;
-            if (Input.GetMouseButtonUp(1))
+            if (Input.GetMouseButtonUp(2))
                 _isRotation = false;
             
             MovementInpute();
