@@ -14,13 +14,19 @@ namespace Units
             //All units are controlled by the Player
             foreach (var obj in FindObjectsOfType<UnitComponent>())
             {
-                if ((int) obj.gameObject.GetComponent<UnitComponent>().unitySetting.GetTeam ==
-                    (int) gameObject.GetComponent<UnitsSelection>().GetTeam)
+                var wayToComponent = obj.gameObject.GetComponent<UnitComponent>();
+                var wayToSettings = gameObject.GetComponent<UnitsControl>();
+                
+                if ((int) wayToComponent.unitySetting.GetTeam == (int) wayToSettings.GetGroupControl)
                     allUnitsPlayer.Add(obj.gameObject);
             }
         }
 
-
+        public bool ConntainsInfo(GameObject obj)
+        {
+            return unitSelected.Contains(obj);
+        }
+        
         public void AddUnits(GameObject obj)
         {
             if (unitSelected.Contains(obj))
