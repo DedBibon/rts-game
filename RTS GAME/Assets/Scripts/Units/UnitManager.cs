@@ -31,16 +31,17 @@ namespace Units
         {
             if (unitSelected.Contains(obj))
                 return;
-
             unitSelected.Add(obj);
+            //Selected cirlce 
+            obj.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         }
 
         public void DelUnits(GameObject obj)
         {
             if (!unitSelected.Contains(obj))
                 return;
-
             unitSelected.Remove(obj);
+            obj.gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
 
         public List<GameObject> AllUnitsPlayer => allUnitsPlayer;
