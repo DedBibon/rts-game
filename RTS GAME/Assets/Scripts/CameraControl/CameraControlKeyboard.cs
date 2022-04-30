@@ -6,6 +6,8 @@ namespace CameraControl
     {
         //Pointer on camera for limite zooming
         [SerializeField]private Camera cameraControl;
+
+        public Camera CameraControl => cameraControl;
         
         //Move + zoom
         public float zoomSpeed;

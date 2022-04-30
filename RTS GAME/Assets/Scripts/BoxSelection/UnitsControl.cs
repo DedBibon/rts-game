@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 using BoxSelection;
 using CameraControl;
 using Units;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine.UIElements;
 
 namespace ObjectSelection
 {
@@ -9,6 +12,8 @@ namespace ObjectSelection
     {
         //Units Selection group
         [SerializeField] private Team groupControl;
+
+        [SerializeField] private LayerMask clickable;
 
         //Selection box settings (default settings)
         [SerializeField] private float widthBoard = 1;
@@ -71,13 +76,23 @@ namespace ObjectSelection
 
         private void CheckSelectionObject()
         {
+            var objWay = gameObject.GetComponent<UnitManager>();
+            
+            //Click select
+            if (Input.GetMouseButtonUp(0))
+            {
+                var cameraControl = gameObject.GetComponent<CameraControlKeyboard>().CameraControl;
+                var ray = cameraControl.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out var hit, Mathf.Infinity, clickable))
+                    objWay.AddUnits(hit.collider.gameObject);
+            }
+            
             if (!_isSelecting)
                 return;
-
-            var objWay = gameObject.GetComponent<UnitManager>();
+            
+            //Choice with Shift and without (box selection)
             foreach (var list in objWay.AllUnitsPlayer)
             {
-                //Choice with Shift and without
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
                     if (IsWithinSelectionBounds(list.gameObject))
